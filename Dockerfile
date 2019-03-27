@@ -4,6 +4,9 @@ MAINTAINER ngot "https://github.com/ngot"
 
 RUN apt-get update && \ 
 	apt-get -y install g++-multilib build-essential && \
+	rm -f /usr/include/asm && \
+	ln -s x86_64-linux-gnu /usr/include/i386-linux-gnu && \
+	ln -s x86_64-linux-gnu /usr/include/x86_64-linux-gnux32 && \
     apt-get -y --no-install-recommends install make cmake xz-utils git clang-6.0 && \
     apt-get install g++-5-arm-linux-gnueabihf -y && \
     rm -f /usr/bin/arm-linux-gnueabihf-gcc && \
@@ -25,10 +28,6 @@ RUN apt-get update && \
 	rm -f /usr/bin/mips64-linux-gnuabi64-g++ && \
 	ln -s mips64-linux-gnuabi64-gcc-5 /usr/bin/mips64-linux-gnuabi64-gcc && \
 	ln -s mips64-linux-gnuabi64-g++-5 /usr/bin/mips64-linux-gnuabi64-g++ && \
-	ln -s x86_64-linux-gnu /usr/include/i386-linux-gnu && \
-	ln -s x86_64-linux-gnu /usr/include/x86_64-linux-gnux32 && \
-	update-alternatives --install /usr/bin/clang clang /usr/bin/clang-6.0 999 && \
-	update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-6.0 999 && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* && \
 	rm -rf /usr/share/doc && \
