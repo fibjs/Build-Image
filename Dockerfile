@@ -56,6 +56,8 @@ RUN rm -f /usr/bin/arm-linux-gnueabihf-g++
 RUN ln -s arm-linux-gnueabihf-gcc-5 /usr/bin/arm-linux-gnueabihf-gcc
 RUN ln -s arm-linux-gnueabihf-g++-5 /usr/bin/arm-linux-gnueabihf-g++
 
+RUN apt-get install libc6-dev-arm64-cross -y
+
 # fix qemu libc http://docs.pwntools.com/en/stable/qemu.html
 RUN mkdir /etc/qemu-binfmt
 RUN ln -s /usr/aarch64-linux-gnu /etc/qemu-binfmt/aarch64
