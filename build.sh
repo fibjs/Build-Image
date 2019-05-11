@@ -17,6 +17,7 @@ sudo cp -f ./arm_root_fs/etc/nsswitch.conf
 
 cat /etc/resolv.conf
 cat /etc/hosts
+cat /etc/nsswitch.conf
 
 sudo cp -f /etc/resolv.conf ./arm_root_fs/etc/resolv.conf
 sudo cp -f /etc/hosts ./arm_root_fs/etc/hosts
