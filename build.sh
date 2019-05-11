@@ -6,6 +6,8 @@ sudo tar -zxf ./arm_rootfs.tar.gz
 
 ls -la
 
+ls -la ./arm_root_fs
+
 sudo mount -t proc proc     $DIR/arm_root_fs/proc/
 sudo mount -t sysfs sys     $DIR/arm_root_fs/sys/
 sudo mount -o bind /dev     $DIR/arm_root_fs/dev/
