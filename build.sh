@@ -13,7 +13,7 @@ ls -la ./arm_root_fs
 
 sudo rm -f ./arm_root_fs/etc/hosts
 sudo rm -f ./arm_root_fs/etc/resolv.conf
-sudo cp -f ./arm_root_fs/etc/nsswitch.conf
+sudo rm -f ./arm_root_fs/etc/nsswitch.conf
 
 cat /etc/resolv.conf
 cat /etc/hosts
