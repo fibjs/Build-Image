@@ -1,6 +1,4 @@
 services:
   - docker
 script:
-  - if [[ "$TRAVIS_TAG" != "" ]]; then 
-      ./build.sh; 
-    fi
+  - ./build.sh
