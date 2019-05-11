@@ -11,6 +11,15 @@ ls -la
 
 ls -la ./arm_root_fs
 
+sudo rm -f ./arm_root_fs/etc/hosts
+sudo rm -f ./arm_root_fs/etc/resolv.conf
+
+cat /etc/resolv.conf
+cat /etc/hosts
+
+sudo cp -f /etc/resolv.conf ./arm_root_fs/etc/resolv.conf
+sudo cp -f /etc/hosts ./arm_root_fs/etc/hosts
+
 DIR=`(pwd)`
 
 echo $DIR
