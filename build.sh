@@ -2,10 +2,15 @@
 
 set -ev
 
-docker build -t fibjs/build-env:${TRAVIS_TAG} -f Dockerfile .
+sudo tar -zxvf ./arm_rootfs.tar.gz
 
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+ls -la
 
-docker push fibjs/build-env:${TRAVIS_TAG}
+sudo mount -t proc proc     $DIR/arm_root_fs/proc/
+sudo mount -t sysfs sys     $DIR/arm_root_fs/sys/
+sudo mount -o bind /dev     $DIR/arm_root_fs/dev/
+sudo mount -o bind /dev/pts $DIR/arm_root_fs/dev/pts
+
+sudo chroot ./arm_root_fs fibjs /home/test/main.js
 
 exit 0;
