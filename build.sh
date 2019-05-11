@@ -2,7 +2,7 @@
 
 set -ev
 
-sudo tar -zxvf ./arm_rootfs.tar.gz
+sudo tar -zxf ./arm_rootfs.tar.gz
 
 ls -la
 
