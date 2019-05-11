@@ -13,4 +13,6 @@ mount -t sysfs sys     ./arm_rootfs.tar.gz/arm_root_fs/sys/
 mount -o bind /dev     ./arm_rootfs.tar.gz/arm_root_fs/dev/
 mount -o bind /dev/pts ./arm_rootfs.tar.gz/arm_root_fs/dev/pts
 
+./arm_rootfs.tar.gz/arm_root_fs/bin/fibjs -v
+
 chroot ./arm_rootfs.tar.gz/arm_root_fs fibjs /home/test/main.js
