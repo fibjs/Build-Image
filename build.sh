@@ -2,6 +2,9 @@
 
 set -ev
 
+sudo apt-get update
+sudo apt-get install qemu qemu-user-static -y
+
 sudo tar -zxf ./arm_rootfs.tar.gz
 
 ls -la
