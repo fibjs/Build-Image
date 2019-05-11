@@ -62,3 +62,6 @@ RUN apt-get install libc6-dev-arm64-cross -y
 RUN mkdir /etc/qemu-binfmt
 RUN ln -s /usr/aarch64-linux-gnu /etc/qemu-binfmt/aarch64
 RUN ln -s /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
+
+ADD arm_rootfs.tar.gz /home/arm_rootfs.tar.gz
+ADD build_docker.sh /home/build_docker.sh

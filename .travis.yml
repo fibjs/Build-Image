@@ -1,4 +1,5 @@
 services:
   - docker
 script:
-  - ./build.sh
+  - sudo docker build -t fibjs/build-env:clang -f Dockerfile .
+  - sudo docker run --privileged=true -it fibjs/build-env:clang /bin/sh -c "cd /home; sh build_docker.sh"
