@@ -15,4 +15,4 @@ mount -o bind /dev/pts ./arm_rootfs.tar.gz/arm_root_fs/dev/pts
 
 qemu-arm ./arm_rootfs.tar.gz/arm_root_fs/bin/fibjs -v
 
-chroot ./arm_rootfs.tar.gz/arm_root_fs fibjs /home/test/main.js
+chroot ./arm_rootfs.tar.gz/arm_root_fs qemu-arm-static /bin/fibjs /home/test/main.js
