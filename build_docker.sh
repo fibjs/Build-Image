@@ -15,4 +15,8 @@ mount -o bind /dev/pts ./arm_rootfs.tar.gz/arm_root_fs/dev/pts
 
 qemu-arm ./arm_rootfs.tar.gz/arm_root_fs/bin/fibjs -v
 
-chroot ./arm_rootfs.tar.gz/arm_root_fs qemu-arm-static /bin/fibjs /home/test/main.js
+mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc  
+cat /proc/sys/fs/binfmt_misc/status
+echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' > /proc/sys/fs/binfmt_misc/register  
+
+chroot ./arm_rootfs.tar.gz/arm_root_fs /bin/fibjs /home/test/main.js
