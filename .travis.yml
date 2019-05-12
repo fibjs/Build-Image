@@ -1,8 +1,5 @@
-dist: xenial
 services:
   - docker
 script:
-  - apt-get update
-  - apt-get install binfmt-support qemu qemu-user-static -y
   - sudo docker build -t fibjs/build-env:clang -f Dockerfile .
   - sudo docker run --privileged=true -it fibjs/build-env:clang /bin/sh -c "cd /home; sh build_docker.sh"
