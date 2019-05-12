@@ -4,13 +4,13 @@ WORKDIR /fibjs
 
 RUN apt-get update
 RUN apt-get install software-properties-common -y
-RUN add-apt-repository 'deb http://us.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse' && \
-add-apt-repository 'deb http://us.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse' && \
-add-apt-repository 'deb http://us.archive.ubuntu.com/ubuntu/ xenial-backports main restricted universe multiverse' && \
-add-apt-repository 'deb http://security.ubuntu.com/ubuntu xenial-security main restricted universe multiverse'
+RUN add-apt-repository 'deb http://us.archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse' && \
+add-apt-repository 'deb http://us.archive.ubuntu.com/ubuntu/ bionic-updates main restricted universe multiverse' && \
+add-apt-repository 'deb http://us.archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse' && \
+add-apt-repository 'deb http://security.ubuntu.com/ubuntu bionic-security main restricted universe multiverse'
 
 RUN apt-get update
-RUN apt-get install curl g++ make cmake git g++-multilib qemu -y
+RUN apt-get install curl g++ make cmake git g++-multilib qemu qemu-user-static binfmt-support -y
 
 # https://apt.llvm.org/
 # http://clang.llvm.org/docs/CrossCompilation.html
@@ -56,7 +56,6 @@ RUN rm -f /usr/bin/arm-linux-gnueabihf-g++
 RUN ln -s arm-linux-gnueabihf-gcc-5 /usr/bin/arm-linux-gnueabihf-gcc
 RUN ln -s arm-linux-gnueabihf-g++-5 /usr/bin/arm-linux-gnueabihf-g++
 
-# fix qemu libc http://docs.pwntools.com/en/stable/qemu.html
-RUN mkdir /etc/qemu-binfmt
-RUN ln -s /usr/aarch64-linux-gnu /etc/qemu-binfmt/aarch64
-RUN ln -s /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
+ADD arm_root_fs /home/arm_root_fs
+RUN cp $(which qemu-arm-static) /home/arm_root_fs/$(which qemu-arm-static)
+ADD init_armhf.sh /home/init_armhf.sh
