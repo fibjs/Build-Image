@@ -59,3 +59,7 @@ RUN ln -s arm-linux-gnueabihf-g++-5 /usr/bin/arm-linux-gnueabihf-g++
 ADD arm_root_fs /home/arm_root_fs
 RUN cp $(which qemu-arm-static) /home/arm_root_fs/$(which qemu-arm-static)
 ADD init_armhf.sh /home/init_armhf.sh
+
+ADD arm64_root_fs /home/arm64_root_fs
+RUN cp $(which qemu-aarch64-static) /home/arm64_root_fs/$(which qemu-aarch64-static)
+ADD init_arm64.sh /home/init_arm64.sh
