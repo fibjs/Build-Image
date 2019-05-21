@@ -18,9 +18,9 @@ RUN curl https://apt.llvm.org/llvm-snapshot.gpg.key > /fibjs/llvm-snapshot.gpg.k
 RUN apt-key add llvm-snapshot.gpg.key
 RUN apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main"
 RUN apt-get update
-RUN apt-get install -y clang-8
-RUN ln -s clang-8 /usr/bin/clang
-RUN ln -s clang++-8 /usr/bin/clang++
+RUN apt-get install -y clang-7
+RUN ln -s clang-7 /usr/bin/clang
+RUN ln -s clang++-7 /usr/bin/clang++
 
 RUN rm -f /usr/include/asm
 RUN ln -s x86_64-linux-gnu /usr/include/i386-linux-gnu
