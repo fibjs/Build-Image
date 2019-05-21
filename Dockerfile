@@ -16,7 +16,7 @@ RUN apt-get install curl g++ make cmake git g++-multilib qemu qemu-user-static b
 # http://clang.llvm.org/docs/CrossCompilation.html
 RUN curl https://apt.llvm.org/llvm-snapshot.gpg.key > /fibjs/llvm-snapshot.gpg.key
 RUN apt-key add llvm-snapshot.gpg.key
-RUN apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main"
+RUN apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main"
 RUN apt-get update
 RUN apt-get install -y clang-7
 RUN ln -s clang-7 /usr/bin/clang
