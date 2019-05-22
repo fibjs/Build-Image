@@ -13,11 +13,12 @@ DIR=`pwd`;sudo docker run --privileged=true -it -v ${DIR}:/home/ci fibjs/build-e
 DIR=`pwd`;sudo docker run --privileged=true -it -v ${DIR}:/home/ci fibjs/build-env:clang /bin/sh -c "
         cd /home;
         sh init_arm64.sh;
+        service systemd-binfmt restart;
         cat /proc/sys/fs/binfmt_misc/aarch64;
         cp -f ./ci/fibjs64 ./arm64_root_fs/bin/fibjs;
         cp -rf ./ci/test ./arm64_root_fs/home/test;
         ls -la ./arm64_root_fs/bin/fibjs;
         ls -la ./arm64_root_fs;
-        chroot ./arm64_root_fs qemu-aarch64-static /bin/fibjs /home/test/main.js;"
+        chroot ./arm64_root_fs /bin/fibjs -v"
 
 exit 0;
