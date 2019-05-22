@@ -20,6 +20,6 @@ DIR=`pwd`;sudo docker run --privileged=true -it -v ${DIR}:/home/ci fibjs/build-e
         cp -rf ./ci/test ./arm64_root_fs/home/test;
         ls -la ./arm64_root_fs/bin/fibjs;
         ls -la ./arm64_root_fs;
-        chroot ./arm64_root_fs /bin/fibjs -v"
+        chroot ./arm64_root_fs /bin/fibjs /home/test/main.js"
 
 exit 0;
