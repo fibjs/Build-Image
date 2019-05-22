@@ -2,16 +2,10 @@
 
 set -ev
 
-rm -rf ./arm_root_fs
-tar -zxf ./arm_root_fs.tar.gz
-
-rm -rf ./arm64_root_fs
-tar -zxf ./arm64_root_fs.tar.gz
-
-docker build -t fibjs/build-env:${TRAVIS_TAG} -f Dockerfile .
-
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
-docker push fibjs/build-env:${TRAVIS_TAG}
+DIR=`pwd`;sudo docker run --privileged=true -it -v ${DIR}:/home/ci fibjs/build-env:clang /bin/sh -c "
+        cd /home;
+        sh init_arm64.sh;
+        cp -f ./ci/fibjs ./arm64_root_fs/bin/fibjs;
+        chroot ./arm64_root_fs fibjs -v"
 
 exit 0;
