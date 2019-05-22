@@ -7,9 +7,9 @@ DIR=`pwd`;sudo docker run --privileged=true -it -v ${DIR}:/home/ci fibjs/build-e
         sh init_arm64.sh;
         cp -f ./ci/fibjs64 ./arm64_root_fs/bin/fibjs;
         cp -f ./ci/fibjs ./arm_root_fs/bin/fibjs;
-        ls -la ./arm64_root_fs/bin/fibjs;
         ls -la ./arm_root_fs/bin/fibjs;
-        chroot ./arm64_root_fs fibjs -v
-        chroot ./arm_root_fs fibjs -v"
+        chroot ./arm_root_fs fibjs -v;
+        ls -la ./arm64_root_fs/bin/fibjs;
+        chroot ./arm64_root_fs fibjs -v;"
 
 exit 0;
