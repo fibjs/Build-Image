@@ -2,6 +2,8 @@
 
 set -ev
 
+sudo docker run --rm --privileged multiarch/qemu-user-static:register
+
 DIR=`pwd`;sudo docker run --privileged=true -it -v ${DIR}:/home/ci fibjs/build-env:clang /bin/sh -c "
         cd /home;
         sh init_armhf.sh;
@@ -13,7 +15,6 @@ DIR=`pwd`;sudo docker run --privileged=true -it -v ${DIR}:/home/ci fibjs/build-e
 DIR=`pwd`;sudo docker run --privileged=true -it -v ${DIR}:/home/ci fibjs/build-env:clang /bin/sh -c "
         cd /home;
         sh init_arm64.sh;
-        service systemd-binfmt restart;
         cat /proc/sys/fs/binfmt_misc/aarch64;
         cp -f ./ci/fibjs64 ./arm64_root_fs/bin/fibjs;
         cp -rf ./ci/test ./arm64_root_fs/home/test;
