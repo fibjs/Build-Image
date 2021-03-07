@@ -10,7 +10,7 @@ add-apt-repository 'deb http://us.archive.ubuntu.com/ubuntu/ bionic-backports ma
 add-apt-repository 'deb http://security.ubuntu.com/ubuntu bionic-security main restricted universe multiverse'
 
 RUN apt-get update
-RUN apt-get install curl g++ make cmake git g++-multilib qemu qemu-user-static binfmt-support -y
+RUN apt-get install curl g++ make cmake git g++-multilib qemu qemu-user-static binfmt-support libx11-dev -y
 
 # https://apt.llvm.org/
 # http://clang.llvm.org/docs/CrossCompilation.html
