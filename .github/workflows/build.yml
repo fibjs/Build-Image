@@ -15,19 +15,35 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: Set Env Variables
+        id: set-env-vars
+        shell: bash
+        run: |
+          export GIT_BRANCH=${GITHUB_REF#refs/heads/}
+          export DOCKER_TAG=${GIT_BRANCH//\//'-'}
+          echo "::set-output name=DOCKER_TAG::$DOCKER_TAG"
+
+          export DOCKER_REPO="fibjs/build-env"
+          echo "::set-output name=DOCKER_REPO::$DOCKER_REPO"
+          
+          export DOCKER_REPO_WITH_TAG="$DOCKER_REPO:$DOCKER_TAG"
+          echo "::set-output name=DOCKER_REPO_WITH_TAG::$DOCKER_REPO_WITH_TAG"
       - name: Build
         shell: bash
         run: |
-          tar -xzf arm_root_fs.tar.gz;
-          tar -xzf arm64_root_fs.tar.gz;
+          rm -rf ./arm_root_fs
+          tar -zxf ./arm_root_fs.tar.gz
+
+          rm -rf ./arm64_root_fs
+          tar -zxf ./arm64_root_fs.tar.gz
+
           docker build .
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: richardo/fibjs-build-env
+          repository: ${{ steps.set-env-vars.outputs.DOCKER_REPO }}
           tag_with_ref: true
+          # tags: ${{ steps.set-env-vars.outputs.DOCKER_TAG  }}
+          # push: true
