@@ -1,0 +1,33 @@
+name: Publish Docker image
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - github_actions
+      - clang
+      - master
+  release:
+    types: [published]
+jobs:
+  buildr_and_push:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Build
+        shell: bash
+        run: |
+          tar -xzf arm_root_fs.tar.gz;
+          tar -xzf arm64_root_fs.tar.gz;
+          docker build .
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: richardo/fibjs-build-env
+          tag_with_ref: true
